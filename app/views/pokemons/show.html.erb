@@ -10,7 +10,7 @@
 <h2>Moves</h2>
 <ul>
   <% @moves.each do |move| %>
-    <li><%= move.ename %> - Power: <%= move.power %>, PP: <%= move.pp %>, Accuracy: <%= move.accuracy %></li>
+    <li><%= move.ename %> </li> - Power: <%= move.power %>, PP: <%= move.pp %>, Accuracy: <%= move.accuracy %></li>
   <% end %>
 </ul>
 <%= link_to 'Back to List', pokemons_path %>
