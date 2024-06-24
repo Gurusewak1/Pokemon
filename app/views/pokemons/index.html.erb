@@ -1,0 +1,22 @@
+<h1>Pokémon List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name (English)</th>
+      <th>Type</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pokemons.each do |pokemon| %>
+      <tr>
+        <td><%= pokemon.id %></td>
+        <td><%= pokemon.name_english %></td>
+        <td><%= pokemon.pokemon_type %></td>
+        <td><%= link_to 'Show Details', pokemon_path(pokemon) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name_english: MyString
+  pokemon_type: MyString
+  base_hp: 1
+  base_attack: 1
+  base_defense: 1
+  base_sp_attack: 1
+  base_sp_defense: 1
+  base_speed: 1
+
+two:
+  name_english: MyString
+  pokemon_type: MyString
+  base_hp: 1
+  base_attack: 1
+  base_defense: 1
+  base_sp_attack: 1
+  base_sp_defense: 1
+  base_speed: 1
