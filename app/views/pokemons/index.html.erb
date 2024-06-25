@@ -10,9 +10,10 @@
 
 <h1>Pokémon List</h1>
 
-<%= form_with(url: pokemons_path, method: "get") do |form| %>
-  <%= form.text_field :search, placeholder: "Search Pokémon..." %>
-  <%= form.submit "Search" %>
+<%= form_tag(pokemons_path, method: :get) do %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Search by Pokémon name' %>
+  <%= select_tag :type, options_for_select(@types.pluck(:name), params[:type]), prompt: 'Filter by type' %>
+  <%= submit_tag 'Search' %>
 <% end %>
 
 <table>
