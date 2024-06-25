@@ -3,6 +3,8 @@ class RegionsController < ApplicationController
   
     def index
       @regions = Region.all
+      @items = Item.page(params[:page]).per(10)
+
     end
   
     def show
