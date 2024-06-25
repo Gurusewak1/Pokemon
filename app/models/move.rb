@@ -1,6 +1,7 @@
 class Move < ApplicationRecord
     self.inheritance_column = nil
-    has_and_belongs_to_many :pokemons
+    has_many :pokemon_moves
+    has_many :pokemons, through: :pokemon_moves
 
   
     # Validations

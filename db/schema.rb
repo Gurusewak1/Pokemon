@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_121628) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_212422) do
   create_table "moves", force: :cascade do |t|
     t.integer "accuracy"
     t.string "ename"
@@ -26,6 +26,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_121628) do
     t.integer "move_id", null: false
   end
 
+  create_table "pokemon_moves", force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.integer "move_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["move_id"], name: "index_pokemon_moves_on_move_id"
+    t.index ["pokemon_id"], name: "index_pokemon_moves_on_pokemon_id"
+  end
+
   create_table "pokemon_regions", force: :cascade do |t|
     t.integer "pokemon_id", null: false
     t.integer "region_id", null: false
@@ -33,6 +42,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_121628) do
     t.datetime "updated_at", null: false
     t.index ["pokemon_id"], name: "index_pokemon_regions_on_pokemon_id"
     t.index ["region_id"], name: "index_pokemon_regions_on_region_id"
+  end
+
+  create_table "pokemon_types", force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.integer "type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_pokemon_types_on_pokemon_id"
+    t.index ["type_id"], name: "index_pokemon_types_on_type_id"
   end
 
   create_table "pokemons", force: :cascade do |t|
@@ -69,6 +87,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_121628) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "pokemon_moves", "moves"
+  add_foreign_key "pokemon_moves", "pokemons"
   add_foreign_key "pokemon_regions", "pokemons"
   add_foreign_key "pokemon_regions", "regions"
+  add_foreign_key "pokemon_types", "pokemons"
+  add_foreign_key "pokemon_types", "types"
 end

@@ -1,8 +1,10 @@
 class TypesController < ApplicationController
   def index
-    @types = Type.all
-    @items = Item.page(params[:page]).per(10)
-
+    if params[:search].present?
+      @types = Type.where("name LIKE ?", "%#{params[:search]}%")
+    else
+      @types = Type.all
+    end
   end
 
   def show

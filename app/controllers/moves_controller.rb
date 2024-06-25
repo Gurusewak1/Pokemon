@@ -2,9 +2,11 @@ class MovesController < ApplicationController
   before_action :set_move, only: [:show]
 
   def index
-    @moves = Move.all
-    @items = Item.page(params[:page]).per(10)
-
+    if params[:search].present?
+      @moves = Move.where("ename LIKE ?", "%#{params[:search]}%")
+    else
+      @moves = Move.all
+    end
   end
 
   def show

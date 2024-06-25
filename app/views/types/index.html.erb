@@ -1,14 +1,18 @@
 <nav>
   <ul>
-     <li><%= link_to 'About', about_path %></li> 
+    <li><%= link_to 'About', about_path %></li> 
     <li><%= link_to 'Moves', moves_path %></li>
     <li><%= link_to 'Home', home_path %></li>
     <li><%= link_to 'Pokemon', pokemons_path %></li>
     <li><%= link_to 'Region', regions_path %></li>
-
   </ul>
 </nav>
 <h1>All Types</h1>
+
+<%= form_tag(types_path, method: :get) do %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Search types' %>
+  <%= submit_tag 'Search' %>
+<% end %>
 
 <table>
   <thead>
