@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  get 'pokemons/index'
-  get 'pokemons/show'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-resources :pokemons, only: [:index, :show]
-  root "pokemons#index"
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  root "pokemons#home" 
+  resources :pokemons, only: [:index, :show]
+  resources :moves, only: [:index, :show]
+  resources :types, only: [:index, :show]
+  resources :regions, only: [:index, :show] 
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  get 'about', to: 'pokemons#about'
+   get 'home', to: 'pokemons#home'
+
+ 
+
+  # Health check route
+  get "up" => "rails/health#show", as: :rails_health_check
 end

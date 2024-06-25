@@ -1,29 +1,31 @@
-<h1>Pokémon List</h1>
 <nav>
   <ul>
      <li><%= link_to 'About', about_path %></li> 
-    <li><%= link_to 'Moves', moves_path %></li>
+    <li><%= link_to 'Pokemon', pokemons_path %></li>
     <li><%= link_to 'Home', home_path %></li>
     <li><%= link_to 'Types', types_path %></li>
     <li><%= link_to 'Region', regions_path %></li>
 
   </ul>
 </nav>
+<h1>All Moves</h1>
 
 <table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name (English)</th>
+      <th>Name</th>
       <th>Type</th>
+      <th>Power</th>
+      <th>Accuracy</th>
     </tr>
   </thead>
   <tbody>
-    <% @pokemons.each do |pokemon| %>
+    <% @moves.each do |move| %>
       <tr>
-        <td><%= pokemon.id %></td>
-        <td><%= link_to pokemon.name_english, pokemon_path(pokemon) %></td>
-        <td><%= pokemon.pokemon_type %></td>
+        <td><%= link_to move.ename, move_path(move) %></td>
+        <td><%= move.move_type %></td>
+        <td><%= move.power %></td>
+        <td><%= move.accuracy %></td>
       </tr>
     <% end %>
   </tbody>

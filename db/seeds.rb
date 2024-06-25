@@ -1,25 +1,17 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 require 'json'
+require 'faker'
 
 # Load data from JSON file
-pokemon_data = File.read(Rails.root.join('db', 'pokemon.json'))
-pokemons = JSON.parse(pokemon_data)
+pokemon_data = JSON.parse(File.read(Rails.root.join('db', 'pokemon.json')))
+move_data = JSON.parse(File.read(Rails.root.join('db', 'moves.json')))
 
 # Create Pokemon records
-pokemons.each do |pokemon|
+pokemon_data.each do |pokemon|
   name_english = pokemon['name']['english']
   types = pokemon['type']
   base_stats = pokemon['base']
 
-  Pokemon.create(
+  Pokemon.create!(
     name_english: name_english,
     pokemon_type: types.join(', '),
     base_hp: base_stats['HP'],
@@ -31,17 +23,30 @@ pokemons.each do |pokemon|
   )
 end
 
-# Load move data from JSON file
-move_data = File.read(Rails.root.join('db', 'moves.json'))
-moves = JSON.parse(move_data)
-
 # Create Move records
-moves.each do |move|
-  Move.create(
+move_data.each do |move|
+  Move.create!(
     accuracy: move['accuracy'],
     ename: move['ename'],
     power: move['power'],
     pp: move['pp'],
     move_type: move['type'] # Use the custom inheritance column name
   )
+end
+
+# Predefined list of region names
+regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Galar', 'Isle of Armor', 'Crown Tundra']
+
+# Seed Regions with associated Pokémon from JSON data
+regions.each do |region_name|
+  region = Region.create!(
+    name: region_name,
+    description: Faker::Lorem.paragraph(sentence_count: 2)
+  )
+
+  # Seed Pokémon for each region from JSON
+  pokemon_data.each do |pokemon_attributes|
+    pokemon = Pokemon.find_by(name_english: pokemon_attributes['name']['english'])
+    region.pokemons << pokemon if pokemon
+  end
 end

@@ -1,0 +1,16 @@
+<h1>All Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @types.each do |type| %>
+      <tr>
+        <td><%= link_to type.name, type_path(type) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

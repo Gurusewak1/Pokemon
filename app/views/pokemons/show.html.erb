@@ -7,10 +7,11 @@
 <p><strong>Sp. Attack:</strong> <%= @pokemon.base_sp_attack %></p>
 <p><strong>Sp. Defense:</strong> <%= @pokemon.base_sp_defense %></p>
 <p><strong>Speed:</strong> <%= @pokemon.base_speed %></p>
+
 <h2>Moves</h2>
 <ul>
   <% @moves.each do |move| %>
-    <li><%= move.ename %> </li> - Power: <%= move.power %>, PP: <%= move.pp %>, Accuracy: <%= move.accuracy %></li>
+    <li><%= link_to move.ename, move_path(move) %> - Power: <%= move.power %>, PP: <%= move.pp %>, Accuracy: <%= move.accuracy %></li>
   <% end %>
 </ul>
 <%= link_to 'Back to List', pokemons_path %>

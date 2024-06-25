@@ -1,3 +1,4 @@
+
 class PokemonsController < ApplicationController
   def index
     @pokemons = Pokemon.all
@@ -5,6 +6,8 @@ class PokemonsController < ApplicationController
 
   def show
     @pokemon = Pokemon.find(params[:id])
-    @moves = @pokemon.moves_by_type
+  end
+
+  def home
   end
 end

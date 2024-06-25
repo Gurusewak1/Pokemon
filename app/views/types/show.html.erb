@@ -1,0 +1,26 @@
+<h1>Pokémon of Type <%= @type.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name (English)</th>
+      <th>Type</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @pokemons.each do |pokemon| %>
+      <tr>
+        <td><%= pokemon.id %></td>
+        <td><%= link_to pokemon.name_english, pokemon_path(pokemon) %></td>
+        <td>
+          <% pokemon.types.each do |type| %>
+            <%= type.name %>
+          <% end %>
+        </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
