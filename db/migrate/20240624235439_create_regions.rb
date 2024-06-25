@@ -7,6 +7,5 @@ class CreateRegions < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :regions, :name, unique: true  # Add uniqueness constraint to the name column
   end
 end

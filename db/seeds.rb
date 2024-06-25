@@ -1,6 +1,13 @@
 require 'json'
 require 'faker'
 
+# Clear existing data in the correct order to avoid foreign key constraint issues
+PokemonRegion.delete_all
+Type.delete_all
+Pokemon.delete_all
+Move.delete_all
+Region.delete_all
+
 # Load data from JSON file
 pokemon_data = JSON.parse(File.read(Rails.root.join('db', 'pokemon.json')))
 move_data = JSON.parse(File.read(Rails.root.join('db', 'moves.json')))
@@ -11,7 +18,7 @@ pokemon_data.each do |pokemon|
   types = pokemon['type']
   base_stats = pokemon['base']
 
-  Pokemon.create!(
+  pokemon_record = Pokemon.create!(
     name_english: name_english,
     pokemon_type: types.join(', '),
     base_hp: base_stats['HP'],
@@ -21,6 +28,11 @@ pokemon_data.each do |pokemon|
     base_sp_defense: base_stats['Sp. Defense'],
     base_speed: base_stats['Speed']
   )
+
+  types.each do |type_name|
+    type = Type.find_or_create_by!(name: type_name)
+    pokemon_record.types << type unless pokemon_record.types.include?(type)
+  end
 end
 
 # Create Move records
@@ -30,7 +42,7 @@ move_data.each do |move|
     ename: move['ename'],
     power: move['power'],
     pp: move['pp'],
-    move_type: move['type'] # Use the custom inheritance column name
+    move_type: move['type']
   )
 end
 
@@ -39,14 +51,13 @@ regions = ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Unova', 'Kalos', 'Alola', 'Gala
 
 # Seed Regions with associated Pokémon from JSON data
 regions.each do |region_name|
-  region = Region.create!(
-    name: region_name,
-    description: Faker::Lorem.paragraph(sentence_count: 2)
-  )
+  region = Region.find_or_create_by!(name: region_name) do |region|
+    region.description = Faker::Lorem.paragraph(sentence_count: 2)
+  end
 
   # Seed Pokémon for each region from JSON
   pokemon_data.each do |pokemon_attributes|
     pokemon = Pokemon.find_by(name_english: pokemon_attributes['name']['english'])
-    region.pokemons << pokemon if pokemon
+    region.pokemon_regions.find_or_create_by!(pokemon: pokemon) if pokemon && !region.pokemons.include?(pokemon)
   end
 end
