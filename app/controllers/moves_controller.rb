@@ -3,10 +3,12 @@ class MovesController < ApplicationController
 
   def index
     @moves = Move.all
+    @items = Item.page(params[:page]).per(10)
+
   end
 
   def show
-    @move = Move.find(params[:id])
+    @pokemons = @move.pokemons
   end
 
   private

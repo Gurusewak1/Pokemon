@@ -3,4 +3,12 @@
 <p><strong>Power:</strong> <%= @move.power %></p>
 <p><strong>PP:</strong> <%= @move.pp %></p>
 <p><strong>Accuracy:</strong> <%= @move.accuracy %></p>
-<%= link_to 'Back', pokemons_path %>
+
+<h2>Pokémon with this Move:</h2>
+<ul>
+  <% @pokemons.each do |pokemon| %>
+    <li><%= link_to pokemon.name_english, pokemon_path(pokemon) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', moves_path %>
