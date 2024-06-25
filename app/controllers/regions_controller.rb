@@ -2,13 +2,7 @@ class RegionsController < ApplicationController
     before_action :set_region, only: [:show]
   
     def index
-      @regions = if params[:category_id].present? && params[:search].present?
-                   category = Category.find(params[:category_id])
-                   category.regions.where('name LIKE ?', "%#{params[:search]}%")
-                 elsif params[:category_id].present?
-                   category = Category.find(params[:category_id])
-                   category.regions
-                 elsif params[:search].present?
+      @regions = if params[:search]
                    Region.where('name LIKE ?', "%#{params[:search]}%")
                  else
                    Region.all

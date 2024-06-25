@@ -10,7 +10,6 @@
 <h1>All Regions</h1>
 
 <%= form_tag(regions_path, method: :get) do %>
-  <%= select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name, params[:category_id]), prompt: 'Select a category' %>
   <%= text_field_tag :search, params[:search], placeholder: 'Search regions' %>
   <%= submit_tag 'Search' %>
 <% end %>
