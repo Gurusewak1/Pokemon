@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_000747) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_121628) do
   create_table "moves", force: :cascade do |t|
     t.integer "accuracy"
     t.string "ename"
@@ -19,6 +19,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_000747) do
     t.string "move_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "moves_pokemons", id: false, force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.integer "move_id", null: false
   end
 
   create_table "pokemon_regions", force: :cascade do |t|

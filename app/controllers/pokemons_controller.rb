@@ -1,13 +1,17 @@
-
 class PokemonsController < ApplicationController
+  before_action :set_pokemon, only: [:show]
+
   def index
     @pokemons = Pokemon.all
   end
 
   def show
-    @pokemon = Pokemon.find(params[:id])
+    @moves = @pokemon.moves_by_type
   end
 
-  def home
+  private
+
+  def set_pokemon
+    @pokemon = Pokemon.find(params[:id])
   end
 end

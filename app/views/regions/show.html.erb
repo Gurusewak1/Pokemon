@@ -1,8 +1,10 @@
 <h1><%= @region.name %></h1>
 
-<h2>Pokemons in <%= @region.name %>:</h2>
+<p><strong>Description:</strong> <%= @region.description %></p>
+
+<h2>Pokémons in <%= @region.name %>:</h2>
 <ul>
-  <% @pokemons.each do |pokemon| %>
+  <% @region.pokemons.each do |pokemon| %>
     <li><%= link_to pokemon.name_english, pokemon_path(pokemon) %></li>
   <% end %>
 </ul>
