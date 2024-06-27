@@ -1,8 +1,10 @@
 class PokemonsController < ApplicationController
+
+  
   before_action :set_pokemon, only: [:show]
 
   def index
-    @types = Type.all  # Fetch all types for the dropdown
+    @types = Type.all  
 
     @pokemons = if params[:type].present?
       type_name = params[:type]
@@ -11,8 +13,10 @@ class PokemonsController < ApplicationController
     elsif params[:search].present?
       Pokemon.where("name_english LIKE ?", "%#{params[:search]}%")
     else
-      Pokemon.all
+      @pokemons = Pokemon.all.page(params[:page]).per(10)
     end
+
+   
   end
 
   def show

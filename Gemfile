@@ -69,3 +69,9 @@ end
 gem "faker", "~> 3.4"
 
 gem 'kaminari'
+
+
+
+
+gem 'tailwindcss-rails'
+

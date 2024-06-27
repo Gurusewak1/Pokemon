@@ -1,37 +1,49 @@
-<nav>
-  <ul>
-     <li><%= link_to 'About', about_path %></li> 
-    <li><%= link_to 'Pokemon', pokemons_path %></li>
-    <li><%= link_to 'Home', home_path %></li>
-    <li><%= link_to 'Types', types_path %></li>
-    <li><%= link_to 'Region', regions_path %></li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Moves</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><%= link_to 'About', about_path %></li> 
+      <li><%= link_to 'Pokemon', pokemons_path %></li>
+      <li><%= link_to 'Home', home_path %></li>
+      <li><%= link_to 'Types', types_path %></li>
+      <li><%= link_to 'Region', regions_path %></li>
+    </ul>
+  </nav>
 
-  </ul>
-</nav>
-<h1>All Moves</h1>
+  <h1>All Moves</h1>
 
-<%= form_tag(moves_path, method: "get") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search moves..." %>
-  <%= submit_tag "Search" %>
-<% end %>
+  <%= form_tag(moves_path, method: "get") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search moves..." %>
+    <%= submit_tag "Search" %>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Power</th>
-      <th>Accuracy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @moves.each do |move| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= link_to move.ename, move_path(move) %></td>
-        <td><%= move.move_type %></td>
-        <td><%= move.power %></td>
-        <td><%= move.accuracy %></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Power</th>
+        <th>Accuracy</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @moves.each do |move| %>
+        <tr>
+          <td><%= link_to move.ename, move_path(move) %></td>
+          <td><%= move.move_type %></td>
+          <td><%= move.power %></td>
+          <td><%= move.accuracy %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @moves %>
+
+</body>
+</html>

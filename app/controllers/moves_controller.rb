@@ -5,7 +5,8 @@ class MovesController < ApplicationController
     if params[:search].present?
       @moves = Move.where("ename LIKE ?", "%#{params[:search]}%")
     else
-      @moves = Move.all
+      @moves = Move.all.page(params[:page]).per(10)
+
     end
   end
 

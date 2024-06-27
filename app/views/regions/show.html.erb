@@ -1,10 +1,34 @@
-<h1><%= @region.name %></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @region.name %> - Region Details</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><%= link_to 'About', about_path %></li> 
+      <li><%= link_to 'Moves', moves_path %></li>
+      <li><%= link_to 'Home', home_path %></li>
+      <li><%= link_to 'Pokemon', pokemons_path %></li>
+      <li><%= link_to 'Types', types_path %></li>
+    </ul>
+  </nav>
 
-<p><strong>Description:</strong> <%= @region.description %></p>
+  <h1><%= @region.name %></h1>
 
-<h2>Pokémons in <%= @region.name %>:</h2>
-<ul>
-  <% @region.pokemons.each do |pokemon| %>
-    <li><%= link_to pokemon.name_english, pokemon_path(pokemon) %></li>
-  <% end %>
-</ul>
+  <p><strong>Description:</strong> <%= @region.description %></p>
+
+  <h2>Pokémons in <%= @region.name %>:</h2>
+  <ul>
+    <% @region.pokemons.each do |pokemon| %>
+      <li><%= link_to pokemon.name_english, pokemon_path(pokemon) %></li>
+    <% end %>
+  </ul>
+
+  <%= link_to 'Back to Regions', regions_path %>
+
+
+</body>
+</html>

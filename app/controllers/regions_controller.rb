@@ -5,7 +5,7 @@ class RegionsController < ApplicationController
       @regions = if params[:search]
                    Region.where('name LIKE ?', "%#{params[:search]}%")
                  else
-                   Region.all
+                   Region.all.page(params[:page]).per(5)
                  end
     end
   

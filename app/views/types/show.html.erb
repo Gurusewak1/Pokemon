@@ -1,26 +1,35 @@
-<h1>Pokémon of Type <%= @type.name %></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon of Type <%= @type.name %></title>
+</head>
+<body>
+  <h1>Pokémon of Type <%= @type.name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name (English)</th>
-      <th>Type</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <% @pokemons.each do |pokemon| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= pokemon.id %></td>
-        <td><%= link_to pokemon.name_english, pokemon_path(pokemon) %></td>
-        <td>
-          <% pokemon.types.each do |type| %>
-            <%= type.name %>
-          <% end %>
-        </td>
-        
+        <th>ID</th>
+        <th>Name (English)</th>
+        <th>Type</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @pokemons.each do |pokemon| %>
+        <tr>
+          <td><%= pokemon.id %></td>
+          <td><%= link_to pokemon.name_english, pokemon_path(pokemon) %></td>
+          <td>
+            <% pokemon.types.each do |type| %>
+              <%= type.name %>
+              <%= ',' unless type == pokemon.types.last %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+</html>

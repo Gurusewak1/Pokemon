@@ -3,7 +3,7 @@ class TypesController < ApplicationController
     if params[:search].present?
       @types = Type.where("name LIKE ?", "%#{params[:search]}%")
     else
-      @types = Type.all
+      @types = Type.all.page(params[:page]).per(5)
     end
   end
 

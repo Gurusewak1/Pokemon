@@ -1,14 +1,29 @@
-<h1><%= @move.ename %></h1>
-<p><strong>Type:</strong> <%= @move.move_type %></p>
-<p><strong>Power:</strong> <%= @move.power %></p>
-<p><strong>PP:</strong> <%= @move.pp %></p>
-<p><strong>Accuracy:</strong> <%= @move.accuracy %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @move.ename %> - Move Details</title>
+</head>
+<body>
+  <h1><%= @move.ename %></h1>
 
-<h2>Pokémon with this Move:</h2>
-<ul>
-  <% @pokemons.each do |pokemon| %>
-    <li><%= link_to pokemon.name_english, pokemon_path(pokemon) %></li>
+  <p><strong>Type:</strong> <%= @move.move_type %></p>
+  <p><strong>Power:</strong> <%= @move.power %></p>
+  <p><strong>PP:</strong> <%= @move.pp %></p>
+  <p><strong>Accuracy:</strong> <%= @move.accuracy %></p>
+
+  <h2>Pokémon with this Move:</h2>
+  <% if @pokemons.any? %>
+    <ul>
+      <% @pokemons.each do |pokemon| %>
+        <li><%= link_to pokemon.name_english, pokemon_path(pokemon) %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No Pokémon have this move.</p>
   <% end %>
-</ul>
 
-<%= link_to 'Back', moves_path %>
+  <%= link_to 'Back to Moves', moves_path %>
+</body>
+</html>
