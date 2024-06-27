@@ -73,5 +73,4 @@ gem 'kaminari'
 
 
 
-gem 'tailwindcss-rails'
 
