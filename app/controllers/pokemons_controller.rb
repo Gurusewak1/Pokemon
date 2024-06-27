@@ -1,22 +1,21 @@
 class PokemonsController < ApplicationController
-
-  
   before_action :set_pokemon, only: [:show]
 
   def index
     @types = Type.all  
 
-    @pokemons = if params[:type].present?
+    if params[:type].present?
       type_name = params[:type]
-      Pokemon.joins(:types).where(types: { name: type_name })
-             .where("name_english LIKE ?", "%#{params[:search]}%")
+      @pokemons = Pokemon.joins(:types)
+                         .where(types: { name: type_name })
+                         .where("name_english LIKE ?", "%#{params[:search]}%")
+                         .page(params[:page]).per(10)
     elsif params[:search].present?
-      Pokemon.where("name_english LIKE ?", "%#{params[:search]}%")
+      @pokemons = Pokemon.where("name_english LIKE ?", "%#{params[:search]}%")
+                         .page(params[:page]).per(10)
     else
-      @pokemons = Pokemon.all.page(params[:page]).per(10)
+      @pokemons = Pokemon.page(params[:page]).per(10)
     end
-
-   
   end
 
   def show

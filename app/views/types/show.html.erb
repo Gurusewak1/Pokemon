@@ -6,6 +6,15 @@
   <title>Pokémon of Type <%= @type.name %></title>
 </head>
 <body>
+   <nav>
+    <ul>
+      <li><%= link_to 'About', about_path %></li> 
+      <li><%= link_to 'Moves', moves_path %></li>
+      <li><%= link_to 'Home', home_path %></li>
+      <li><%= link_to 'Pokemon', pokemons_path %></li>
+      <li><%= link_to 'Region', regions_path %></li>
+    </ul>
+  </nav>
   <h1>Pokémon of Type <%= @type.name %></h1>
 
   <table>

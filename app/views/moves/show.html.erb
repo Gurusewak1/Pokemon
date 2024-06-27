@@ -6,6 +6,15 @@
   <title><%= @move.ename %> - Move Details</title>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><%= link_to 'About', about_path %></li> 
+      <li><%= link_to 'Pokemon', pokemons_path %></li>
+      <li><%= link_to 'Home', home_path %></li>
+      <li><%= link_to 'Types', types_path %></li>
+      <li><%= link_to 'Region', regions_path %></li>
+    </ul>
+  </nav>
   <h1><%= @move.ename %></h1>
 
   <p><strong>Type:</strong> <%= @move.move_type %></p>

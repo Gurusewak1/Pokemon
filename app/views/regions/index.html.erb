@@ -22,7 +22,35 @@
     <%= text_field_tag :search, params[:search], placeholder: 'Search regions' %>
     <%= submit_tag 'Search' %>
   <% end %>
+ <!-- Map container -->
+  <div id="map" style="height: 300px; width :300px;"></div>
 
+  <!-- Google Maps JavaScript API initialization -->
+  <script>
+    // Initialize and add the map
+    function initMap() {
+      // The location of your map's center
+      var center = { lat: -34.397, lng: 150.644 };
+      
+      // The map, centered at the specified location
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center
+      });
+      
+      // Optional: Add a marker at the center location
+      var marker = new google.maps.Marker({
+        position: center,
+        map: map,
+        title: 'Hello World!'
+      });
+    }
+    
+    // Call the initMap function when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initMap();
+    });
+  </script>
   <table>
     <thead>
       <tr>
