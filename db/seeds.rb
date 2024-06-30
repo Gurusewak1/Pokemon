@@ -65,3 +65,10 @@ regions.each do |region_name|
     region.pokemons << pokemon if pokemon && !region.pokemons.include?(pokemon)
   end
 end
+
+# Ensure the AdminUser exists only if not already created
+if AdminUser.where(email: 'admin@example.com').exists?
+  puts "AdminUser with email 'admin@example.com' already exists."
+else
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+end
